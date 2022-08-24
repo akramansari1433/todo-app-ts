@@ -1,6 +1,9 @@
 import axios from "axios";
 
-export const login = async (loginCred: { email: string; password: string }) => {
+export const login = async (loginCred?: {
+   email?: string;
+   password?: string;
+}) => {
    let res = await axios.post("http://localhost:3000/signin", loginCred);
    return res.data;
 };
@@ -9,7 +12,7 @@ export const addTask = async (task: {
    task: { tname: string; userId: number };
 }) => {
    let res = axios.post("http://localhost:3000/addtask", task);
-   return (await res.data;
+   return (await res).data;
 };
 
 export const getAllTask = async (userId: number) => {
@@ -32,10 +35,10 @@ export const markInCompleted = async (tid: number) => {
    return res.data;
 };
 
-export const register = async (userData: {
-   name: string;
-   email: string;
-   password: string;
+export const register = async (userData?: {
+   name?: string;
+   email?: string;
+   password?: string;
 }) => {
    let res = await axios.post("http://localhost:3000/register", userData);
    return res.data;
