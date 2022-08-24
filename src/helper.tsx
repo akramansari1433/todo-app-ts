@@ -8,9 +8,7 @@ export const login = async (loginCred?: {
    return res.data;
 };
 
-export const addTask = async (task: {
-   task: { tname: string; userId: number };
-}) => {
+export const addTask = async (task: { tname: string; userId: number }) => {
    let res = axios.post("http://localhost:3000/addtask", task);
    return (await res).data;
 };
