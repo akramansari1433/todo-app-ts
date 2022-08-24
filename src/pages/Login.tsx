@@ -7,7 +7,11 @@ interface credential {
    password?: string;
 }
 
-export default function Login() {
+interface userProps {
+   setUser: React.Dispatch<React.SetStateAction<any>>;
+}
+
+export default function Login(props: userProps) {
    const [loginCred, setLoginCred] = useState<credential>();
    const [error, setError] = useState<string>("");
 
@@ -24,6 +28,7 @@ export default function Login() {
       login(loginCred)
          .then((res) => {
             window.localStorage.setItem("user", JSON.stringify(res));
+            props.setUser(window.localStorage.getItem("user"));
             setError("");
          })
          .catch((err) => {

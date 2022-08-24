@@ -6,7 +6,15 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+interface userProps {
+   user: {
+      userId: number;
+      name: string;
+   };
+   setUser: React.Dispatch<React.SetStateAction<any>>;
+}
+
+export default function Navbar(props: userProps) {
    return (
       <Box sx={{ flexGrow: 1 }}>
          <AppBar position="static" color="inherit">
@@ -15,12 +23,34 @@ export default function Navbar() {
                   Todo App
                </Typography>
 
-               <Button color="primary" component={Link} to="/login">
-                  Login
-               </Button>
-               <Button color="primary" component={Link} to="/register">
-                  Register
-               </Button>
+               {props.user ? (
+                  <>
+                     <Typography variant="h6" mx={2}>
+                        Welcome {props.user.name}
+                     </Typography>
+                     <Button
+                        color="error"
+                        variant="outlined"
+                        onClick={() => {
+                           window.localStorage.clear();
+                           props.setUser(
+                              JSON.parse(window.localStorage.getItem("user")!)
+                           );
+                        }}
+                     >
+                        Logout
+                     </Button>
+                  </>
+               ) : (
+                  <>
+                     <Button color="primary" component={Link} to="/login">
+                        Login
+                     </Button>
+                     <Button color="primary" component={Link} to="/register">
+                        Register
+                     </Button>
+                  </>
+               )}
             </Toolbar>
          </AppBar>
       </Box>
