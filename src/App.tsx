@@ -27,7 +27,16 @@ function App() {
                }
             />
             <Route path="/register" element={<Register />} />
-            <Route path="/" element={<Home userId={user.userId} />} />
+            <Route
+               path="/"
+               element={
+                  user ? (
+                     <Home userId={user.userId} />
+                  ) : (
+                     <Navigate to="/login" />
+                  )
+               }
+            />
          </Routes>
       </BrowserRouter>
    );

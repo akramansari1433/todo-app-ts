@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { addTask, getAllTask } from "../../helper";
 
 interface userProps {
-   userId: number;
+   userId?: number;
 }
 interface task {
    tid: number;
